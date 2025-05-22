@@ -5,12 +5,13 @@
         <title>Portfolio</title>
     </head>
     <body>
-        <script src="https://unpkg.com/@rive-app/canvas"></script>
+        
         <canvas id="cardcanvas" width="154.6875" height="225"></canvas>
         <canvas id="rogercanvas" width="300" height="300"></canvas>
-    </body>
+        <script src="https://unpkg.com/@rive-app/canvas"></script>
+
     <script>
-      const card = new Rive({
+      const card = new rive.Rive({
         canvas: document.getElementById("cardcanvas"),
         src: "card.riv",
         autoplay: true,
@@ -21,8 +22,8 @@
           card.setTextRunValue('cardRun', `6`)
           card.stateMachineInputs('Card State').find((i) => i.name === 'setSuit').value =
             '2'
-        }
-      })
+        },
+      });
       const roger = new rive.Rive({
     src: "roger-reduced.riv",
     canvas: document.getElementById("rogercanvas"),
@@ -31,7 +32,7 @@
     onLoad: () => {
     roger.resizeDrawingSurfaceToCanvas();
     },
-})
+});
       </script>
-
+    </body>
 </html>
