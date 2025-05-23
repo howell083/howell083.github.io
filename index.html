@@ -24,9 +24,20 @@
 
             onLoad: () => {
             card.resizeDrawingSurfaceToCanvas()
-            card.setTextRunValue('cardRun', `6`)
-            card.stateMachineInputs('Card State').find((i) => i.name === 'setSuit').value =
-                '2'
+                  let tempVal = Math.floor(Math.random() * 13);
+                    if (tempVal == 0) {
+                        tempVal = 'A'
+                    } else if (tempVal == 10) {
+                        tempVal = 'J'
+                    } else if (tempVal == 11) {
+                        tempVal = 'Q'
+                    } else if (tempVal == 12) {
+                        tempVal = 'K'
+                    } else {
+                        tempVal += 1
+                    }
+                card.setTextRunValue('cardRun', `${tempVal}`);
+                card.stateMachineInputs('Card State').find((i) => i.name === 'setSuit').value = `${Math.floor(Math.random() * 4)}`
             },
         });
         const roger = new rive.Rive({
