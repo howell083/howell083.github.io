@@ -3,36 +3,72 @@
     <head>
         <meta charset="UTF-8" />
         <title>Portfolio</title>
+        <link type="text/css" href="index.css" rel="stylesheet">
     </head>
+    <header><h1>Jacob Howell Rive Portfolio</h1></header>
     <body>
         
-        <canvas id="cardcanvas" width="154.6875" height="225"></canvas>
-        <canvas id="rogercanvas" width="300" height="300"></canvas>
-        <script src="https://unpkg.com/@rive-app/canvas"></script>
+        <div class="items">
+            <div class="canvas"><canvas id="cardcanvas" width="154.6875" height="225"></canvas><p>Click to flip</p></div>
+            <div class="canvas"><canvas id="rogercanvas" width="300" height="300"></canvas><p>Click to dance</p></div>
+            <div class="canvas"><canvas id="cakecanvas" width="300" height="300"></canvas></div>
+            <div class="canvas"><canvas id="eyecanvas" width="200" height="200"></canvas></div>
+            <div class="canvas"><script src="https://unpkg.com/@rive-app/canvas"></script></div>
+        </div>
+      <script>
+        const card = new rive.Rive({
+            canvas: document.getElementById("cardcanvas"),
+            src: "card.riv",
+            autoplay: true,
+            stateMachines: 'Card State',
 
-    <script>
-      const card = new rive.Rive({
-        canvas: document.getElementById("cardcanvas"),
-        src: "card.riv",
-        autoplay: true,
-        stateMachines: 'Card State',
+            onLoad: () => {
+            card.resizeDrawingSurfaceToCanvas()
+            card.setTextRunValue('cardRun', `6`)
+            card.stateMachineInputs('Card State').find((i) => i.name === 'setSuit').value =
+                '2'
+            },
+        });
+        const roger = new rive.Rive({
+            src: "roger-reduced.riv",
+            canvas: document.getElementById("rogercanvas"),
+            autoplay: true,
+            stateMachines: "Site State",
+            onLoad: () => {
+            roger.resizeDrawingSurfaceToCanvas();
+            },
+        });
+        const ck = new rive.Rive({
+            src: "cake.riv",
+            //
+            canvas: document.getElementById("cakecanvas"),
+            autoplay: true,
+            stateMachines: "cakeState",
+            onLoad: () => {
+                ck.resizeDrawingSurfaceToCanvas();
+            },
+        });
+        const eye = new rive.Rive({
+            src: "eyetest.riv",
+            canvas: document.getElementById("eyecanvas"),
+            autoplay: true,
+            onLoad: () => {
+                eye.resizeDrawingSurfaceToCanvas();
+            }
+        });
+        function rogerHover(riveEvent){
+            const eventData = riveEvent.data;
+            const eventProperties = eventData.properties;
+            if(eventProperties.hover){
+                document.getElementById("rogercanvas").style = 'cursor: pointer';
+            } else if(!eventProperties.hover){
+                document.getElementById("rogercanvas").style = 'cursor: auto';
+            }
+        }
+        //
+        //RiveEvent call
 
-        onLoad: () => {
-          card.resizeDrawingSurfaceToCanvas()
-          card.setTextRunValue('cardRun', `6`)
-          card.stateMachineInputs('Card State').find((i) => i.name === 'setSuit').value =
-            '2'
-        },
-      });
-      const roger = new rive.Rive({
-    src: "roger-reduced.riv",
-    canvas: document.getElementById("rogercanvas"),
-    autoplay: true,
-    stateMachines: "Site State",
-    onLoad: () => {
-    roger.resizeDrawingSurfaceToCanvas();
-    },
-});
+        //roger.on(EventType.RiveEvent, rogerHover);
       </script>
     </body>
 </html>

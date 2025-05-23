@@ -1,0 +1,37 @@
+html {
+    color: lightgray;
+    background-color: rgb(40, 70, 70);
+    display: block;
+
+}
+header {
+ margin: auto;
+ text-align: center;
+    
+}
+body {
+
+    background-color: rgb(47, 79, 79);
+    display: block;
+    justify-content: center;
+
+}
+.items {
+    display: flex;
+    justify-items: center;
+
+}
+.canvas {
+    display: grid;
+    margin: auto;
+}
+@media only screen and (max-width: 950px) {
+    body {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+    }
+    .items {
+        display: grid;
+    }
+}
